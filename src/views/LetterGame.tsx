@@ -10,6 +10,9 @@ export interface TileProps {
   isCorrect?: boolean
 }
 
+const plusSign = String.fromCharCode(65291)
+const minusSign = String.fromCharCode(65293)
+
 export default function LetterGame() {
   const createNewTiles = (newNumOfLetters?: number) => {
     const currentNumOfLetters = newNumOfLetters ? newNumOfLetters : numOfLetters
@@ -24,9 +27,10 @@ export default function LetterGame() {
   const [tiles, setTiles] = useState<TileProps[]>(initialLetters)
 
   const styles = {
-    button: 'bg-emerald-400 text-white p-4 mx-2 border-2 border-white rounded h-20 text-xl items-center justify-center flex font-bold'
+    button: 'bg-emerald-400 text-white mx-2 border-2 border-white rounded xs:h-20 h-10 text-xl items-center justify-center flex font-bold',
+    squareButton: 'aspect-square xs:w-20 w-10 text-xl xs:text-3xl lg:text-5xl',
+    rectangleButton: 'p-4'
   }
-
 
   const handleGameOver = () => {
     const inactiveTiles = tiles.map(tile => ({...tile, isClicked: true}))
@@ -58,18 +62,18 @@ export default function LetterGame() {
 
   return (
     <article className='w-full h-full'>
-      <header className='flex justify-center items-center my-5'>
-        <button onClick={() => handleDifficulty(true)} disabled={numOfLetters === 9} className={clsx(styles.button, 'aspect-square text-4xl')}>
-          +
+      <header className='flex justify-center items-center my-5 h-1/10'>
+        <button onClick={() => handleDifficulty(true)} disabled={numOfLetters === 9} className={clsx(styles.button, styles.squareButton)}>
+          {plusSign}
         </button>
 
-        <span className={clsx(styles.button, 'aspect-square text-4xl')}>{numOfLetters}</span>
-        <button onClick={() => handleDifficulty(false)} disabled={numOfLetters === 3} className={clsx(styles.button, 'aspect-square text-4xl')}>
-          -
+        <span className={clsx(styles.button, styles.squareButton)}>{numOfLetters}</span>
+        <button onClick={() => handleDifficulty(false)} disabled={numOfLetters === 3} className={clsx(styles.button, styles.squareButton)}>
+          {minusSign}
         </button>
-        <button onClick={() => handleReset()} className={clsx(styles.button, 'flex justify-center items-center')}> RESET </button>
+        <button onClick={() => handleReset()} className={clsx(styles.button, styles.rectangleButton)}> RESET </button>
       </header>
-      <main className='w-full h-full flex justify-center bg-white/10 pt-8'>
+      <main className='w-full h-9/10 flex justify-center bg-white/20 pt-8'>
         <LetterList tiles={tiles} handleClick={handleClick}/>
       </main>
     </article>

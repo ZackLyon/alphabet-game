@@ -2,7 +2,7 @@ import clsx from 'clsx'
 import LetterTile from './LetterTile'
 
 export const styles = {
-  wrapper: 'grid grid-cols-3 gap-8 list-none pb-10 w-3/4 h-3/4',
+  wrapper: 'grid grid-cols-3 gap-y-5 list-none pb-10 w-3/4 h-3/4',
 }
 
 interface TileListProps {
