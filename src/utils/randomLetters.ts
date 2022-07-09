@@ -7,11 +7,15 @@ export default function randomLetters(numOfLetters: number = 0, arr:string[] = [
 
   if(numOfLetters === arr.length) return arr
 
-  const newLetter = chooseLetter(arr.length === 0 ? uppercaseAlphabet : uppercaseAlphabet.filter(a => !arr.includes(a)))
+  const newLetter = chooseLetter(arr.length === 0 ? uppercaseAlphabet : uppercaseAlphabet.filter(a => !arr.includes(a) && !arr.includes(a.toLowerCase())))
 
   return randomLetters(numOfLetters, [...arr, newLetter])
 }
 
 const chooseLetter = (possibleLetters: string[]) => {
-  return possibleLetters[Math.floor(Math.random() * possibleLetters.length)]
+  const randomLetter = possibleLetters[Math.floor(Math.random() * possibleLetters.length)]
+  const randomlyLowercase = Math.round(Math.random())
+
+
+  return randomlyLowercase ? randomLetter.toLowerCase() : randomLetter
 }

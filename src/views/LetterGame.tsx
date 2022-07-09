@@ -61,8 +61,8 @@ export default function LetterGame() {
   }
 
   return (
-    <article className='w-full h-full'>
-      <header className='flex justify-center items-center my-5 h-1/10'>
+    <article className='w-full h-full flex flex-col'>
+      <header className='flex justify-center items-center py-5 bg-black'>
         <button onClick={() => handleDifficulty(true)} disabled={numOfLetters === 9} className={clsx(styles.button, styles.squareButton)}>
           {plusSign}
         </button>
@@ -73,9 +73,9 @@ export default function LetterGame() {
         </button>
         <button onClick={() => handleReset()} className={clsx(styles.button, styles.rectangleButton)}> RESET </button>
       </header>
-      <main className='w-full h-9/10 flex justify-center bg-white/20 pt-8'>
+      <section className='flex flex-grow justify-center items-center bg-red-100/30'>
         <LetterList tiles={tiles} handleClick={handleClick}/>
-      </main>
+      </section>
     </article>
   )
 }

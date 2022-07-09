@@ -10,6 +10,10 @@ module.exports = {
       ...screens
     },
     extend: {    
+      fontFamily: {
+        'display': ['Didact Gothic', 'sans-serif']
+      },
+
       colors: {
       'tangerine': '#f78f65',
       'sunset': '#fa9c84',
@@ -18,6 +22,7 @@ module.exports = {
       },
       height: {
         '1/10': '10%',
+        '8/10': '80%',
         '9/10': '90%'
       },
       padding: {

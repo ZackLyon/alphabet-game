@@ -5,7 +5,7 @@ import LetterGame from "./views/LetterGame"
 function App() {
   
   return (
-    <div className="absolute inset-0 bg-black overflow-hidden">
+    <div className="h-screen w-screen bg-black overflow-hidden">
       <LetterGame />
     </div>
   );
