@@ -20,7 +20,7 @@ interface TileProps {
 
   return (
     <ul className= {clsx(styles.wrapper, '')}>
-      {tiles.map(tile => <LetterTile {...tile} onClick={() => handleClick(tile)}/>
+      {tiles.map(tile => <LetterTile key={tile.letter} {...tile} onClick={() => handleClick(tile)}/>
       )}
     </ul>
   )

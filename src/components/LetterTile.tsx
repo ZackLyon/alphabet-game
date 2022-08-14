@@ -17,14 +17,14 @@ const LetterTile: React.FC<ClickableTileProps> = ({ letter, isClicked, isCorrect
 
   const clickedStyle = () => isCorrect ? 'correct' : 'incorrect'
   const currentStyle = () => isClicked ? clickedStyle() : 'unclicked'
-  console.log('current style ', currentStyle())
-
 
   return <li key={letter} className={styles.li}>
     <button
      onClick={onClick}
-     className={clsx(styles.button, styles[currentStyle()], 'font-display')}>
+     className={clsx(styles.button, styles[currentStyle()], 'font-display')}
+     disabled={isClicked}>
       {letter}
+      
     </button>
   </li>;
 }

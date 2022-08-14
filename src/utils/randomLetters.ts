@@ -2,7 +2,6 @@
 const uppercaseAlphabet = Array(26).fill(65).map((n, i) => String.fromCharCode(n + i))
 
 export default function randomLetters(numOfLetters: number = 0, arr:string[] = []): string[] {
-  console.log(arr)
   if(typeof numOfLetters !== 'number' || numOfLetters > 26 || numOfLetters < 0) numOfLetters = 3
 
   if(numOfLetters === arr.length) return arr
