@@ -26,7 +26,7 @@ const LetterTile: React.FC<ClickableTileProps> = ({ letter, isClicked, isCorrect
       {letter}
       
     </button>
-  </li>;
+  </li>
 }
 
 export default LetterTile

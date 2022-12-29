@@ -19,7 +19,7 @@ interface TileProps {
  const LetterList: React.FC<TileListProps> =({tiles, handleClick}) => {
 
   return (
-    <ul className= {clsx(styles.wrapper, '')}>
+    <ul className= {clsx(styles.wrapper)}>
       {tiles.map(tile => <LetterTile key={tile.letter} {...tile} onClick={() => handleClick(tile)}/>
       )}
     </ul>

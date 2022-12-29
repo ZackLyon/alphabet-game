@@ -10,6 +10,8 @@ export interface TileProps {
   isCorrect?: boolean
 }
 
+export type capitalizationOptions = 'a' | 'A' | 'aA'
+
 const styles = {
   button: 'bg-emerald-400 text-white mx-2 border-2 border-white rounded xs:h-20 h-10 text-xl items-center justify-center flex font-bold',
   squareButton: 'aspect-square xs:w-20 w-10 text-xl xs:text-3xl lg:text-5xl',
@@ -25,10 +27,25 @@ export default function LetterGame() {
   const [tileCount, setTileCount] = useState(3)
   const [tiles, setTiles] = useState<TileProps[]>([])
   const [isFirstPlay, setIsFirstPlay] = useState(true)
+  const [capitalization, setCapitalization] = useState<capitalizationOptions>('a')
+
+  const onCapitalizationChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    switch(capitalization) {
+      case 'a':
+        setCapitalization('A')
+        break
+      case 'A':
+        setCapitalization('aA')
+        break
+      case 'aA':
+        setCapitalization('a')
+        break
+    }
+  }
 
   const createNewTiles = (newLetterCount?: number) => {
     const currentNumOfLetters = newLetterCount ? newLetterCount : tileCount
-    const newLetters = randomLetters(currentNumOfLetters)
+    const newLetters = randomLetters(currentNumOfLetters, capitalization)
     const newCorrectLetter = newLetters[Math.floor(Math.random() * currentNumOfLetters)]
     const newTiles = newLetters.map(letter => ({letter, isClicked: false, isCorrect: letter === newCorrectLetter}))
     return newTiles
@@ -55,7 +72,6 @@ export default function LetterGame() {
   const handleDifficulty = (isIncrement: boolean) => {
     const updatedNumOfLetters = isIncrement ? tileCount + 3 : tileCount - 3
     setTileCount(updatedNumOfLetters)
-    handlePlay(updatedNumOfLetters)
   }
 
   const handleClick = (clickedTile: TileProps) => {
@@ -87,13 +103,14 @@ export default function LetterGame() {
     <article className='w-full h-full flex flex-col'>
       <header className='flex justify-center items-center py-5 bg-black'>
         <button onClick={() => handlePlay()} className={clsx(styles.button, styles.rectangleButton)}>{isFirstPlay ? 'PLAY' : 'REPLAY'}</button>
-        <button onClick={() => handleDifficulty(true)} disabled={tileCount === 9} className={clsx(styles.button, styles.squareButton)}>
-          {plusSign}
-        </button>
-        <span className={clsx(styles.button, styles.squareButton)}>{tileCount}</span>
         <button onClick={() => handleDifficulty(false)} disabled={tileCount === 3} className={clsx(styles.button, styles.squareButton)}>
           {minusSign}
         </button>
+        <span className={clsx(styles.button, styles.squareButton)}>{tileCount}</span>
+        <button onClick={() => handleDifficulty(true)} disabled={tileCount === 9} className={clsx(styles.button, styles.squareButton)}>
+          {plusSign}
+        </button>
+        <button className={clsx(styles.button, styles.squareButton)} onClick={onCapitalizationChange}>{capitalization}</button>
       </header>
       <section className='flex flex-grow justify-center items-center bg-red-100/30'>
         <LetterList tiles={tiles} handleClick={handleClick}/>
